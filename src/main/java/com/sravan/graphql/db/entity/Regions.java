@@ -1,41 +1,25 @@
 package com.sravan.graphql.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@AllArgsConstructor @NoArgsConstructor @Getter@Setter @ToString
 @Table(name="REGIONS")
-public class Regions {
+public class Regions implements Serializable {
 
     @Id
     @Column(name="REGION_ID", nullable = false)
-    private Integer regionid;
+    private Long regionid;
     @Column(name="REGION_NAME", nullable = false)
     private String regionName;
 
-    public Regions() {
-    }
-
-    public Regions(Integer regionid, String regionName) {
-        this.regionid = regionid;
-        this.regionName = regionName;
-    }
-
-    public Integer getRegionid() {
-        return regionid;
-    }
-
-    public void setRegionid(Integer regionid) {
-        this.regionid = regionid;
-    }
-
-    public String getRegionName() {
-        return regionName;
-    }
-
-    public void setRegionName(String regionName) {
-        this.regionName = regionName;
-    }
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "REGION_ID",referencedColumnName = "REGION_ID")
+    private Set<Countries> countries;
 }

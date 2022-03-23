@@ -1,3 +1,23 @@
+type Country
+{
+countryId: String!,
+countryName:String,
+region: Region
+}
+type Region
+{
+regionid: Long!,
+regionName: String
+countries: [Country]
+}
+
+input Filter
+{
+regionIds:[Long]!
+}
+
 type Query{
-    test(Id: Int): String
+    test(id: Long): Region,
+    test1(filter: Filter): [Region]
+    test2(id: String): Country
 }
