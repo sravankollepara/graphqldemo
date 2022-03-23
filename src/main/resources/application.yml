@@ -11,3 +11,13 @@ spring:
     console.enabled: true
     console.path: /h2-console
     console.settings.trace: false
+
+graphql:
+  servlet:
+    mapping: /test
+graphiql:
+  mapping: /graphiql
+  endpoint: /test
+  props:
+    variables:
+      headerEditorEnabled: true
